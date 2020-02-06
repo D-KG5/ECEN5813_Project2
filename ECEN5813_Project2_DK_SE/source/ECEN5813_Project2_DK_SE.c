@@ -42,7 +42,8 @@
 /* TODO: insert other include files here. */
 
 /* TODO: insert other definitions and declarations here. */
-
+#define FBRUN
+#define PCRUN
 /*
  * @brief   Application entry point.
  */
@@ -55,8 +56,9 @@ int main(void) {
   	/* Init FSL debug console. */
     BOARD_InitDebugConsole();
 
+#ifdef FBRUN
     PRINTF("Hello World\n");
-    PRINTF("Hello World dasjkbfa\n");
+    PRINTF("Hello World FBRUN\n");
 
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;
@@ -67,5 +69,20 @@ int main(void) {
             tight while() loop */
         __asm volatile ("nop");
     }
+#endif
+#ifdef PCRUN
+    PRINTF("Hello World\n");
+    PRINTF("Hello World PCRUN\n");
+
+    /* Force the counter to be placed into memory. */
+    volatile static int j = 0 ;
+    /* Enter an infinite loop, just incrementing a counter. */
+    while(1) {
+        j++ ;
+        /* 'Dummy' NOP to allow source level single stepping of
+            tight while() loop */
+        __asm volatile ("nop");
+    }
+#endif
     return 0 ;
 }
