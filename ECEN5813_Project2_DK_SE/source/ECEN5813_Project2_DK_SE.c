@@ -44,6 +44,18 @@
 /* TODO: insert other definitions and declarations here. */
 #define FBRUN
 #define PCRUN
+
+#define RED_LED_SHIFT   (18)	// on port B
+#define GREEN_LED_SHIFT (19)	// on port B
+#define BLUE_LED_SHIFT  (1)		// on port D
+#define MASK(x) (1UL << (x))
+
+static void delay(volatile uint32_t number){
+	while(number != 0){
+		__asm volatile("NOP");
+		number--;
+	}
+}
 /*
  * @brief   Application entry point.
  */
@@ -57,8 +69,40 @@ int main(void) {
     BOARD_InitDebugConsole();
 
 #ifdef FBRUN
-    PRINTF("Hello World\n");
-    PRINTF("Hello World FBRUN\n");
+    PRINTF("Hello World\r\n");
+    PRINTF("Hello World FBRUN\r\n");
+    // https://github.com/alexander-g-dean/ESF/blob/master/Code/Chapter_2/Source/main.c
+    int num;
+	PORTB->PCR[RED_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
+	PORTB->PCR[RED_LED_SHIFT] |= PORT_PCR_MUX(1);
+	PORTB->PCR[GREEN_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
+	PORTB->PCR[GREEN_LED_SHIFT] |= PORT_PCR_MUX(1);
+	PORTD->PCR[BLUE_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
+	PORTD->PCR[BLUE_LED_SHIFT] |= PORT_PCR_MUX(1);
+
+	PTB->PDDR |= MASK(RED_LED_SHIFT) | MASK(GREEN_LED_SHIFT);
+	PTD->PDDR |= MASK(BLUE_LED_SHIFT);
+
+	PTB->PCOR |= MASK(RED_LED_SHIFT) | MASK(GREEN_LED_SHIFT);
+	PTD->PCOR |= MASK(BLUE_LED_SHIFT);
+
+	while (1) {
+		for (num = 0; num < 8; num++) {
+			if (num & 1)
+				PTB->PSOR = MASK(RED_LED_SHIFT);
+			else
+				PTB->PCOR = MASK(RED_LED_SHIFT);
+			if (num & 2)
+				PTB->PSOR = MASK(GREEN_LED_SHIFT);
+			else
+				PTB->PCOR = MASK(GREEN_LED_SHIFT);
+			if (num & 4)
+				PTD->PSOR = MASK(BLUE_LED_SHIFT);
+			else
+				PTD->PCOR = MASK(BLUE_LED_SHIFT);
+				delay(2000000);
+		}
+	}
 
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;
