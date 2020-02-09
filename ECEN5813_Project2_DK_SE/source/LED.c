@@ -9,11 +9,14 @@
 #include "MKL25Z4.h"
 #include "fsl_debug_console.h"
 
+#include "LED.h"
 #include "def.h"
 
 // initialize RGB LEDs
 void LED_init(void){
     // https://github.com/alexander-g-dean/ESF/blob/master/Code/Chapter_2/Source/main.c
+
+	SIM->SCGC5 |= SIM_SCGC5_PORTA_MASK;
     // set GPIO for RGB LED Pins
 	// Make 3 pins GPIO
 	PORTB->PCR[RED_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
@@ -64,11 +67,11 @@ void LED_on(uint8_t color){
 		PTB->PCOR = MASK(GREEN_LED_SHIFT);
 		PTD->PCOR = MASK(BLUE_LED_SHIFT);
 #if DEBUG
-		PRINTF("ALL ON\r\n");
+//		PRINTF("ALL ON\r\n");
 #endif
 		break;
 	default:
-		PRINTF("ERROR\r\n");
+		PRINTF("Error turning on LED\r\n");
 	}
 }
 
@@ -99,10 +102,10 @@ void LED_off(uint8_t color){
 		PTB->PSOR = MASK(GREEN_LED_SHIFT);
 		PTD->PSOR = MASK(BLUE_LED_SHIFT);
 #if DEBUG
-		PRINTF("ALL OFF\r\n");
+//		PRINTF("ALL OFF\r\n");
 #endif
 		break;
 	default:
-		PRINTF("ERROR\r\n");
+		PRINTF("Error turning off LED\r\n");
 	}
 }
