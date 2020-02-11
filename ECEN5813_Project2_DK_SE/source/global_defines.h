@@ -1,12 +1,12 @@
 /*
- * def.h
+ * global defines.h
  *
  *  Created on: Feb 8, 2020
  *      Author: Dhruva
  */
 
-#ifndef DEF_H_
-#define DEF_H_
+#ifndef GLOBAL_DEFINES_H_
+#define GLOBAL_DEFINES_H_
 
 // macros to enable disable debug, FB, PC modes
 #define FBRUN
@@ -25,4 +25,4 @@
 #define BLUE 3U
 #define ALL 4U
 
-#endif /* DEF_H_ */
+#endif /* GLOBAL_DEFINES_H_ */

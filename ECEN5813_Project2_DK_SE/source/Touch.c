@@ -11,7 +11,7 @@
 
 #include "Touch.h"
 #include "LED.h"
-#include "def.h"
+#include "global_defines.h"
 
 // global variable for Set_colour function
 uint8_t colour = RED;
@@ -42,7 +42,7 @@ void Touch_init(void){
 // start slider scan
 uint16_t Touch_scan(void){
 	int scan;
-	TSI0->DATA = 	TSI_DATA_TSICH(9u); // Using channel 9 of the TSI
+	TSI0->DATA = TSI_DATA_TSICH(9u); // Using channel 9 of the TSI
 	TSI0->DATA |= TSI_DATA_SWTS_MASK; // Software trigger for scan
 	scan = SCAN_DATA;
 	TSI0->GENCS |= TSI_GENCS_EOSF_MASK ; // Reset end of scan flag

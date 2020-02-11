@@ -10,14 +10,14 @@
 #include "fsl_debug_console.h"
 
 #include "LED.h"
-#include "def.h"
+#include "global_defines.h"
 
 // initialize RGB LEDs
 void LED_init(void){
     // https://github.com/alexander-g-dean/ESF/blob/master/Code/Chapter_2/Source/main.c
-
+	// start clock
 	SIM->SCGC5 |= SIM_SCGC5_PORTA_MASK;
-    // set GPIO for RGB LED Pins
+	// set GPIO for RGB LED Pins
 	// Make 3 pins GPIO
 	PORTB->PCR[RED_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
 	PORTB->PCR[RED_LED_SHIFT] |= PORT_PCR_MUX(1);
@@ -26,15 +26,18 @@ void LED_init(void){
 	PORTD->PCR[BLUE_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
 	PORTD->PCR[BLUE_LED_SHIFT] |= PORT_PCR_MUX(1);
 
-	// Set ports to outputs
+	// set ports to outputs
 	PTB->PDDR |= MASK(RED_LED_SHIFT) | MASK(GREEN_LED_SHIFT);
 	PTD->PDDR |= MASK(BLUE_LED_SHIFT);
-
+	// clear ports
 	PTB->PCOR |= MASK(RED_LED_SHIFT) | MASK(GREEN_LED_SHIFT);
 	PTD->PCOR |= MASK(BLUE_LED_SHIFT);
 }
 
-// turn on LED by colour
+/**
+ * turn on LED by colour
+ * @args unit8_t color: pass in desired color of RGB LED
+ */
 void LED_on(uint8_t color){
 	// set RGB LED Pins
 	switch(color){
@@ -75,7 +78,10 @@ void LED_on(uint8_t color){
 	}
 }
 
-// turn off LED by colour
+/**
+ * turn off LED by colour
+ * @args unit8_t color: pass in desired color of RGB LED
+ */
 void LED_off(uint8_t color){
 	// clear RGB LED Pins
 	switch(color){

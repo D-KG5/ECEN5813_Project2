@@ -31,6 +31,7 @@
 /**
  * @file    ECEN5813_Project2_DK_SE.c
  * @brief   Application entry point.
+ * @author	Dhruva Koley and Sagar Eligar
  */
 #include <stdio.h>
 #include "board.h"
@@ -42,7 +43,7 @@
 /* TODO: insert other include files here. */
 #include "LED.h"
 #include "Touch.h"
-#include "def.h"
+#include "global_defines.h"
 /* TODO: insert other definitions and declarations here. */
 
 // delay function
