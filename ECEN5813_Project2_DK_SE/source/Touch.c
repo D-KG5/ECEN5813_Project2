@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include "board.h"
 #include "MKL25Z4.h"
-#include "fsl_debug_console.h"
 
 #include "Touch.h"
 #include "LED.h"
@@ -54,7 +53,7 @@ uint8_t Set_colour(void){
 	uint16_t val;
 	val = Touch_scan();
 #if DEBUG
-	PRINTF("SLIDER VALUE %d\r\n", val);
+	printf("SLIDER VALUE %d\r\n", val);
 #endif
 	if(val <= 30){
 		LED_off(ALL);
@@ -74,7 +73,7 @@ uint8_t Set_colour(void){
 		// error
 		LED_off(ALL);
 		colour = 0;
-		PRINTF("Error: Slider Value: %d is out of bounds\r\n", val);
+		printf("Error: Slider Value: %d is out of bounds\r\n", val);
 	}
 	return colour;
 }

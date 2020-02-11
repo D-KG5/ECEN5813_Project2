@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include "board.h"
 #include "MKL25Z4.h"
-#include "fsl_debug_console.h"
 
 #include "LED.h"
 #include "global_defines.h"
@@ -24,9 +23,9 @@ void Delay(volatile uint32_t number){
 // initialize RGB LEDs
 void LED_init(void){
     // https://github.com/alexander-g-dean/ESF/blob/master/Code/Chapter_2/Source/main.c
-	// start clock
-	SIM->SCGC5 |= SIM_SCGC5_PORTA_MASK;
-	// set GPIO for RGB LED Pins
+	// start clock for PORT B and PORT D
+	SIM->SCGC5 |= SIM_SCGC5_PORTB_MASK | SIM_SCGC5_PORTD_MASK;
+
 	// Make 3 pins GPIO
 	PORTB->PCR[RED_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
 	PORTB->PCR[RED_LED_SHIFT] |= PORT_PCR_MUX(1);
@@ -55,7 +54,7 @@ void LED_on(uint8_t color){
 		PTB->PSOR = MASK(GREEN_LED_SHIFT);
 		PTD->PSOR = MASK(BLUE_LED_SHIFT);
 #if DEBUG
-		PRINTF("RED ON\r\n");
+		printf("RED ON\r\n");
 #endif
 		break;
 	case GREEN:
@@ -63,7 +62,7 @@ void LED_on(uint8_t color){
 		PTB->PCOR = MASK(GREEN_LED_SHIFT);
 		PTD->PSOR = MASK(BLUE_LED_SHIFT);
 #if DEBUG
-		PRINTF("GREEN ON\r\n");
+		printf("GREEN ON\r\n");
 #endif
 		break;
 	case BLUE:
@@ -71,7 +70,7 @@ void LED_on(uint8_t color){
 		PTB->PSOR = MASK(GREEN_LED_SHIFT);
 		PTD->PCOR = MASK(BLUE_LED_SHIFT);
 #if DEBUG
-		PRINTF("BLUE ON\r\n");
+		printf("BLUE ON\r\n");
 #endif
 		break;
 	case ALL:
@@ -79,11 +78,11 @@ void LED_on(uint8_t color){
 		PTB->PCOR = MASK(GREEN_LED_SHIFT);
 		PTD->PCOR = MASK(BLUE_LED_SHIFT);
 #if DEBUG
-//		PRINTF("ALL ON\r\n");
+//		printf("ALL ON\r\n");
 #endif
 		break;
 	default:
-		PRINTF("Error turning on LED\r\n");
+		printf("Error turning on LED\r\n");
 	}
 }
 
@@ -97,19 +96,19 @@ void LED_off(uint8_t color){
 	case RED:
 		PTB->PSOR = MASK(RED_LED_SHIFT);
 #if DEBUG
-		PRINTF("RED OFF\r\n");
+		printf("RED OFF\r\n");
 #endif
 		break;
 	case GREEN:
 		PTB->PSOR = MASK(GREEN_LED_SHIFT);
 #if DEBUG
-		PRINTF("GREEN OFF\r\n");
+		printf("GREEN OFF\r\n");
 #endif
 		break;
 	case BLUE:
 		PTD->PSOR = MASK(BLUE_LED_SHIFT);
 #if DEBUG
-		PRINTF("BLUE OFF\r\n");
+		printf("BLUE OFF\r\n");
 #endif
 		break;
 	case ALL:
@@ -117,11 +116,11 @@ void LED_off(uint8_t color){
 		PTB->PSOR = MASK(GREEN_LED_SHIFT);
 		PTD->PSOR = MASK(BLUE_LED_SHIFT);
 #if DEBUG
-//		PRINTF("ALL OFF\r\n");
+//		printf("ALL OFF\r\n");
 #endif
 		break;
 	default:
-		PRINTF("Error turning off LED\r\n");
+		printf("Error turning off LED\r\n");
 	}
 }
 
@@ -130,14 +129,14 @@ void KL25Z_RGB_Flasher(void)
 	int num=0;
 
 
-	SIM->SCGC5 |= SIM_SCGC5_PORTB_MASK | SIM_SCGC5_PORTD_MASK;
-
-
-	PORTD->PCR[BLUE_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
-	PORTD->PCR[BLUE_LED_SHIFT] |= PORT_PCR_MUX(1);
-
-	PTD->PDDR |= MASK(BLUE_LED_SHIFT);
-	PTD->PCOR |= MASK(BLUE_LED_SHIFT);
+//	SIM->SCGC5 |= SIM_SCGC5_PORTB_MASK | SIM_SCGC5_PORTD_MASK;
+//
+//
+//	PORTD->PCR[BLUE_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
+//	PORTD->PCR[BLUE_LED_SHIFT] |= PORT_PCR_MUX(1);
+//
+//	PTD->PDDR |= MASK(BLUE_LED_SHIFT);
+//	PTD->PCOR |= MASK(BLUE_LED_SHIFT);
 
 	while(num<10)
 	{

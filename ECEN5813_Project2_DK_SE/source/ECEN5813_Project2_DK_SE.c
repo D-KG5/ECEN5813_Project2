@@ -39,7 +39,6 @@
 #include "pin_mux.h"
 #include "clock_config.h"
 #include "MKL25Z4.h"
-#include "fsl_debug_console.h"
 /* TODO: insert other include files here. */
 #include "LED.h"
 #include "Touch.h"
@@ -55,22 +54,22 @@ uint32_t Delay_update(uint32_t delay){
 #if DEBUG
 	switch(delay){
 	case 9000000:
-		PRINTF("START TIMER 3000\r\n");
+		printf("START TIMER 3000\r\n");
 		break;
 	case 6000000:
-		PRINTF("START TIMER 2000\r\n");
+		printf("START TIMER 2000\r\n");
 		break;
 	case 3000000:
-		PRINTF("START TIMER 1000\r\n");
+		printf("START TIMER 1000\r\n");
 		break;
 	case 1500000:
-		PRINTF("START TIMER 500\r\n");
+		printf("START TIMER 500\r\n");
 		break;
 	case 0:
-		PRINTF("START TIMER 0\r\n");
+		printf("START TIMER 0\r\n");
 		break;
 	default:
-		PRINTF("Error starting timer\r\n");
+		printf("Error starting timer\r\n");
 		break;
 	}
 #endif
@@ -82,15 +81,8 @@ uint32_t Delay_update(uint32_t delay){
  */
 int main(void) {
 
-  	/* Init board hardware. */
-    BOARD_InitBootPins();
-    BOARD_InitBootClocks();
-    BOARD_InitBootPeripherals();
-  	/* Init FSL debug console. */
-    BOARD_InitDebugConsole();
-
 #ifdef FBRUN
-    PRINTF("Hello World FBRUN\r\n");
+    printf("Hello World FBRUN\r\n");
     // initialize RGB LED and Touch slider
     LED_init();
     Touch_init();
@@ -119,7 +111,7 @@ int main(void) {
 		Delay(Delay_update(1));
 	}
 #if DEBUG
-	PRINTF("10 cycles done\r\n");
+	printf("10 cycles done\r\n");
 #endif
 	LED_off(ALL);	// turn off LED when 10 cycles are finished
 
@@ -134,8 +126,8 @@ int main(void) {
     }
 #endif
 #ifdef PCRUN
-    PRINTF("Hello World\n");
-    PRINTF("Hello World PCRUN\n");
+    printf("Hello World\n");
+    printf("Hello World PCRUN\n");
     KL25Z_RGB_Flasher();
     /* Force the counter to be placed into memory. */
     volatile static int j = 0 ;

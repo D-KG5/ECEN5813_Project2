@@ -10,7 +10,7 @@
 
 // macros to enable disable debug, FB, PC modes
 #define FBRUN
-#define PCRUN
+//#define PCRUN
 #define DEBUG 1
 
 // define macros for LED_init function
