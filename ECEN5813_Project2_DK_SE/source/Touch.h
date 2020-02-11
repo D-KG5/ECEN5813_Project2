@@ -11,6 +11,7 @@
 #define SCAN_OFFSET 544
 #define SCAN_DATA TSI0->DATA & 0xFFFF
 
+
 void Touch_init(void);
 uint16_t Touch_scan(void);
 uint8_t Set_colour(void);

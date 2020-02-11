@@ -13,6 +13,9 @@
 #include "LED.h"
 #include "def.h"
 
+// global variable for Set_colour function
+uint8_t colour = RED;
+
 // initialize slider
 // https://www.digikey.com/eewiki/display/microcontroller/Using+the+Capacitive+Touch+Sensor+on+the+FRDM-KL46Z
 void Touch_init(void){
@@ -49,14 +52,12 @@ uint16_t Touch_scan(void){
 // set colour of LED based on value of slider
 uint8_t Set_colour(void){
 	uint16_t val;
-	uint8_t colour = 0;
 	val = Touch_scan();
 #if DEBUG
 	PRINTF("SLIDER VALUE %d\r\n", val);
 #endif
 	if(val <= 30){
 		LED_off(ALL);
-		colour = ALL;
 	} else if((val > 30) && (val <= 600)){
 		//red
 		LED_off(ALL);

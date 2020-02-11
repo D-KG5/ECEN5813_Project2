@@ -101,6 +101,7 @@ int main(void) {
     LED_init();
     Touch_init();
 
+    // start 10 cycles of LED flashing pattern
 	for(int i = 0; i < 10; i++){
 		// 500ms on, 500ms off
 		LED_on(Set_colour());
@@ -126,6 +127,8 @@ int main(void) {
 #if DEBUG
 	PRINTF("10 cycles done\r\n");
 #endif
+	LED_off(ALL);	// turn off LED when 10 cycles are finished
+
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;
     /* Enter an infinite loop, just incrementing a counter. */
