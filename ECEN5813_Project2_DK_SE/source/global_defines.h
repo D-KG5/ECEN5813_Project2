@@ -9,7 +9,7 @@
 #define GLOBAL_DEFINES_H_
 
 // macros to enable disable debug, FB, PC modes
-#define FBRUN
+//#define FBRUN
 #define PCRUN
 #define DEBUG 1
 

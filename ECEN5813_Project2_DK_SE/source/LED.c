@@ -12,6 +12,15 @@
 #include "LED.h"
 #include "global_defines.h"
 
+// delay function
+void Delay(volatile uint32_t number){
+	while(number != 0){
+		__asm volatile("NOP");
+		number--;
+	}
+}
+
+
 // initialize RGB LEDs
 void LED_init(void){
     // https://github.com/alexander-g-dean/ESF/blob/master/Code/Chapter_2/Source/main.c
@@ -115,3 +124,68 @@ void LED_off(uint8_t color){
 		PRINTF("Error turning off LED\r\n");
 	}
 }
+
+void KL25Z_RGB_Flasher(void)
+{
+	int num=0;
+
+
+	SIM->SCGC5 |= SIM_SCGC5_PORTB_MASK | SIM_SCGC5_PORTD_MASK;
+
+
+	PORTD->PCR[BLUE_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
+	PORTD->PCR[BLUE_LED_SHIFT] |= PORT_PCR_MUX(1);
+
+	PTD->PDDR |= MASK(BLUE_LED_SHIFT);
+	PTD->PCOR |= MASK(BLUE_LED_SHIFT);
+
+	while(num<10)
+	{
+
+
+
+	PTD->PCOR = MASK(BLUE_LED_SHIFT);
+	printf("LED is on\n");
+	Delay(500000);
+
+	PTD->PSOR = MASK(BLUE_LED_SHIFT);
+	printf("LED is off\n");
+	Delay(500000);
+
+
+	PTD->PCOR = MASK(BLUE_LED_SHIFT);
+	printf("LED is on\n");
+	Delay(1000000);
+
+	PTD->PSOR = MASK(BLUE_LED_SHIFT);
+	printf("LED is off\n");
+	Delay(500000);
+
+	PTD->PCOR = MASK(BLUE_LED_SHIFT);
+	printf("LED is on\n");
+	Delay(2000000);
+
+
+	PTD->PSOR = MASK(BLUE_LED_SHIFT);
+	printf("LED is off\n");
+	Delay(500000);
+
+
+	PTD->PCOR = MASK(BLUE_LED_SHIFT);
+	printf("LED is on\n");
+	Delay(3000000);
+
+	PTD->PSOR = MASK(BLUE_LED_SHIFT);
+	printf("LED is off\n");
+	Delay(500000);
+
+
+	printf("loop %d complete\n",num+1);
+
+	num=num+1;
+
+	}
+
+
+}
+

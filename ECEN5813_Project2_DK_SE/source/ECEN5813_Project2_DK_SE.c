@@ -46,13 +46,6 @@
 #include "global_defines.h"
 /* TODO: insert other definitions and declarations here. */
 
-// delay function
-static void Delay(volatile uint32_t number){
-	while(number != 0){
-		__asm volatile("NOP");
-		number--;
-	}
-}
 
 // lookup table function for delay
 // 0=0, 1=500, 2=1000, 3=2000, 4=3000 ms
@@ -143,7 +136,7 @@ int main(void) {
 #ifdef PCRUN
     PRINTF("Hello World\n");
     PRINTF("Hello World PCRUN\n");
-
+    KL25Z_RGB_Flasher();
     /* Force the counter to be placed into memory. */
     volatile static int j = 0 ;
     /* Enter an infinite loop, just incrementing a counter. */
