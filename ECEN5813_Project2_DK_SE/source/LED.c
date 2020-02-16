@@ -53,7 +53,7 @@ void LED_on(uint8_t color){
 		PTB->PCOR = MASK(RED_LED_SHIFT);
 		PTB->PSOR = MASK(GREEN_LED_SHIFT);
 		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-#if DEBUG
+#if DEBUG_L
 		printf("RED ON\r\n");
 #endif
 		break;
@@ -61,7 +61,7 @@ void LED_on(uint8_t color){
 		PTB->PSOR = MASK(RED_LED_SHIFT);
 		PTB->PCOR = MASK(GREEN_LED_SHIFT);
 		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-#if DEBUG
+#if DEBUG_L
 		printf("GREEN ON\r\n");
 #endif
 		break;
@@ -69,7 +69,7 @@ void LED_on(uint8_t color){
 		PTB->PSOR = MASK(RED_LED_SHIFT);
 		PTB->PSOR = MASK(GREEN_LED_SHIFT);
 		PTD->PCOR = MASK(BLUE_LED_SHIFT);
-#if DEBUG
+#if DEBUG_L
 		printf("BLUE ON\r\n");
 #endif
 		break;
@@ -77,8 +77,8 @@ void LED_on(uint8_t color){
 		PTB->PCOR = MASK(RED_LED_SHIFT);
 		PTB->PCOR = MASK(GREEN_LED_SHIFT);
 		PTD->PCOR = MASK(BLUE_LED_SHIFT);
-#if DEBUG
-//		printf("ALL ON\r\n");
+#if DEBUG_L
+		printf("ALL ON\r\n");
 #endif
 		break;
 	default:
@@ -95,19 +95,19 @@ void LED_off(uint8_t color){
 	switch(color){
 	case RED:
 		PTB->PSOR = MASK(RED_LED_SHIFT);
-#if DEBUG
+#if DEBUG_L
 		printf("RED OFF\r\n");
 #endif
 		break;
 	case GREEN:
 		PTB->PSOR = MASK(GREEN_LED_SHIFT);
-#if DEBUG
+#if DEBUG_L
 		printf("GREEN OFF\r\n");
 #endif
 		break;
 	case BLUE:
 		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-#if DEBUG
+#if DEBUG_L
 		printf("BLUE OFF\r\n");
 #endif
 		break;
@@ -115,12 +115,14 @@ void LED_off(uint8_t color){
 		PTB->PSOR = MASK(RED_LED_SHIFT);
 		PTB->PSOR = MASK(GREEN_LED_SHIFT);
 		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-#if DEBUG
-//		printf("ALL OFF\r\n");
+#if DEBUG_L
+		printf("ALL OFF\r\n");
 #endif
 		break;
 	default:
+#if DEBUG_L
 		printf("Error turning off LED\r\n");
+#endif
 	}
 }
 

@@ -52,7 +52,7 @@ uint16_t Touch_scan(void){
 uint8_t Set_colour(void){
 	uint16_t val;
 	val = Touch_scan();
-#if DEBUG
+#if DEBUG_L
 	printf("SLIDER VALUE %d\r\n", val);
 #endif
 	if(val <= 30){
@@ -73,7 +73,9 @@ uint8_t Set_colour(void){
 		// error
 		LED_off(ALL);
 		colour = 0;
+#if DEBUG_L
 		printf("Error: Slider Value: %d is out of bounds\r\n", val);
+#endif
 	}
 	return colour;
 }
