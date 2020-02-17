@@ -149,7 +149,11 @@ int main(void) {
 	}
     PRINTF("PCDEBUG\r\n");
 #endif
-
+	for(count=0;count<=10;count=count+1)
+	{
+		KL25Z_RGB_Flasher();
+		printf("Loop %d complete\n", count+1);
+	}
     /* Force the counter to be placed into memory. */
     volatile static int j = 0 ;
     /* Enter an infinite loop, just incrementing a counter. */
