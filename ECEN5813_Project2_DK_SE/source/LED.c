@@ -123,6 +123,7 @@ void LED_off(uint8_t color){
 #if DEBUG_L
 		PRINTF("Error turning off LED\r\n");
 #endif
+		break;
 	}
 }
 

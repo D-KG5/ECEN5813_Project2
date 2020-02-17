@@ -10,18 +10,21 @@
 
 #include "fsl_debug_console.h"
 
-// macros to enable disable debug, FB, PC modes
-//#define FBRUN
-#define PCRUN
+// macros to enable/disable debug, FB, PC modes
+#define FBRUN
+//#define PCRUN
 #define DEBUG_MODE
 
+// enable UART redirection if FBRUN is defined
 #ifdef FBRUN
-#define SDK_DEBUGCONSOLE 0U
 #define SDK_DEBUGCONSOLE_UART
 #endif
+
 #ifdef PCRUN
-//#define SDK_DEBUGCONSOLE 0U
+// dont define SDK_DEBUGCONSOLE_UART
 #endif
+
+// enable/disable debug printing
 #ifdef DEBUG_MODE
 #define DEBUG_L (1)
 #else
@@ -35,9 +38,9 @@
 #define MASK(x) (1UL << (x))
 
 // define macros for LED_on and LED_off functions
-#define RED 1U
-#define GREEN 2U
-#define BLUE 3U
-#define ALL 4U
+#define RED (1U)
+#define GREEN (2U)
+#define BLUE (3U)
+#define ALL (4U)
 
 #endif /* GLOBAL_DEFINES_H_ */

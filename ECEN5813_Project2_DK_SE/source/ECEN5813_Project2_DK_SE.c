@@ -46,23 +46,25 @@
 #include "global_defines.h"
 /* TODO: insert other definitions and declarations here. */
 
-// lookup table function for delay
-// 0=0, 1=500, 2=1000, 3=2000, 4=3000 ms
+/**
+ * lookup table function for delay, based off of lecture slides
+ * 0=0, 1=500, 2=1000, 3=2000, 4=3000 ms (from trial and error)
+ */
 uint32_t Delay_update(uint32_t delay){
-	static const uint32_t lookup[5] = {0, 750000, 1500000, 3000000, 6000000};
+	static const uint32_t lookup[5] = {0, 1500000, 3000000, 6000000, 9000000};
 	delay = lookup[delay];
 #if DEBUG_L
 	switch(delay){
-	case 6000000:
+	case 9000000:
 		PRINTF("START TIMER 3000\r\n");
 		break;
-	case 3000000:
+	case 6000000:
 		PRINTF("START TIMER 2000\r\n");
 		break;
-	case 1500000:
+	case 3000000:
 		PRINTF("START TIMER 1000\r\n");
 		break;
-	case 750000:
+	case 1500000:
 		PRINTF("START TIMER 500\r\n");
 		break;
 	case 0:
@@ -117,6 +119,9 @@ int main(void) {
 		Delay(Delay_update(4));
 		LED_off(Set_colour());
 		Delay(Delay_update(1));
+#if DEBUG_L
+	PRINTF("Cycle: %i\r\n", i + 1);
+#endif
 	}
 #if DEBUG_L
 	PRINTF("10 cycles done\r\n");
