@@ -130,64 +130,210 @@ void LED_off(uint8_t color){
 void KL25Z_RGB_Flasher(void)
 {
 	int num=0;
+	// Enable clock to Port B and Port D
+	SIM->SCGC5 |= SIM_SCGC5_PORTB_MASK | SIM_SCGC5_PORTD_MASK;
+
+	// Make 3 pins GPIO
+	PORTB->PCR[RED_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
+	PORTB->PCR[RED_LED_SHIFT] |= PORT_PCR_MUX(1);
+	PORTB->PCR[GREEN_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
+	PORTB->PCR[GREEN_LED_SHIFT] |= PORT_PCR_MUX(1);
+	PORTD->PCR[BLUE_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
+	PORTD->PCR[BLUE_LED_SHIFT] |= PORT_PCR_MUX(1);
+
+	// Set ports to outputs
+	PTB->PDDR |= MASK(RED_LED_SHIFT) | MASK(GREEN_LED_SHIFT);
+	PTD->PDDR |= MASK(BLUE_LED_SHIFT);
+
+	PTB->PCOR |= MASK(RED_LED_SHIFT) | MASK(GREEN_LED_SHIFT);
+	PTD->PCOR |= MASK(BLUE_LED_SHIFT);
+	while(num<3)
+		{
 
 
-//	SIM->SCGC5 |= SIM_SCGC5_PORTB_MASK | SIM_SCGC5_PORTD_MASK;
-//
-//
-//	PORTD->PCR[BLUE_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
-//	PORTD->PCR[BLUE_LED_SHIFT] |= PORT_PCR_MUX(1);
-//
-//	PTD->PDDR |= MASK(BLUE_LED_SHIFT);
-//	PTD->PCOR |= MASK(BLUE_LED_SHIFT);
 
-	while(num<10)
-	{
+		PTD->PCOR = MASK(BLUE_LED_SHIFT);
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
 
+		printf("LED Blue on |  Green off  | Red off \n");
+		Delay(500000);
 
-
-	PTD->PCOR = MASK(BLUE_LED_SHIFT);
-	PRINTF("LED is on\n");
-	Delay(500000);
-
-	PTD->PSOR = MASK(BLUE_LED_SHIFT);
-	PRINTF("LED is off\n");
-	Delay(500000);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		printf("LED Blue off |  Green off  | Red off \n");
+		Delay(500000);
 
 
-	PTD->PCOR = MASK(BLUE_LED_SHIFT);
-	PRINTF("LED is on\n");
-	Delay(1000000);
+		PTD->PCOR = MASK(BLUE_LED_SHIFT);
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		printf("LED Blue on |  Green off  | Red off \n");
+		Delay(1000000);
 
-	PTD->PSOR = MASK(BLUE_LED_SHIFT);
-	PRINTF("LED is off\n");
-	Delay(500000);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		printf("LED Blue off |  Green off  | Red off \n");
+		Delay(500000);
 
-	PTD->PCOR = MASK(BLUE_LED_SHIFT);
-	PRINTF("LED is on\n");
-	Delay(2000000);
-
-
-	PTD->PSOR = MASK(BLUE_LED_SHIFT);
-	PRINTF("LED is off\n");
-	Delay(500000);
-
-
-	PTD->PCOR = MASK(BLUE_LED_SHIFT);
-	PRINTF("LED is on\n");
-	Delay(3000000);
-
-	PTD->PSOR = MASK(BLUE_LED_SHIFT);
-	PRINTF("LED is off\n");
-	Delay(500000);
+		PTD->PCOR = MASK(BLUE_LED_SHIFT);
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		printf("LED Blue on |  Green off  | Red off \n");
+		Delay(2000000);
 
 
-	PRINTF("loop %d complete\n",num+1);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		printf("LED Blue off |  Green off  | Red off \n");
+		Delay(500000);
 
-	num=num+1;
 
-	}
+		PTD->PCOR = MASK(BLUE_LED_SHIFT);
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		printf("LED Blue on |  Green off  | Red off \n");
+		Delay(3000000);
 
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		printf("LED Blue off |  Green off  | Red off \n");
+		Delay(500000);
+
+
+
+
+		num=num+1;
+
+		}
+		while(num<6)
+		{
+
+
+
+		PTD->PCOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		printf("LED is Red on |  Green off  | Blue off \n");
+		Delay(500000);
+
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		printf("LED is Red off |  Green off  | Blue off \n");
+		Delay(500000);
+
+
+		PTD->PCOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		printf("LED is Red on |  Green off  | Blue off \n");
+		Delay(1000000);
+
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		printf("LED is Red off |  Green off  | Blue off \n");
+		Delay(500000);
+
+		PTD->PCOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		printf("LED is Red on |  Green off  | Blue off \n");
+		Delay(2000000);
+
+
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		printf("LED is Red off |  Green off  | Blue off \n");
+		Delay(500000);
+
+
+		PTD->PCOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		printf("LED is Red on |  Green off  | Blue off \n");
+		Delay(3000000);
+
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		printf("LED is Red off |  Green off  | Blue off \n");
+		Delay(500000);
+
+
+
+
+		num=num+1;
+
+		}
+		while(num<10)
+		{
+
+
+
+		PTD->PCOR = MASK(GREEN_LED_SHIFT);
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		printf("LED Green on |  Red off  | Blue off \n");
+		Delay(500000);
+
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		printf("LED Green off |  Red off  | Blue off \n");
+		Delay(500000);
+
+
+		PTD->PCOR = MASK(GREEN_LED_SHIFT);
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		printf("LED Green on |  Red off  | Blue off \n");
+		Delay(1000000);
+
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		printf("LED Green off |  Red off  | Blue off \n");
+		Delay(500000);
+
+		PTD->PCOR = MASK(GREEN_LED_SHIFT);
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		printf("LED Green on |  Red off  | Blue off \n");
+		Delay(2000000);
+
+
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		printf("LED Green off |  Red off  | Blue off \n");
+		Delay(500000);
+
+
+		PTD->PCOR = MASK(GREEN_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		printf("LED Green on |  Red off  | Blue off \n");
+		Delay(3000000);
+
+		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		printf("LED Green off |  Red off  | Blue off \n");
+		Delay(500000);
+
+
+
+
+		num=num+1;
+
+		}
 
 }
 

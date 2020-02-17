@@ -140,6 +140,13 @@ int main(void) {
 #endif
 #ifdef PCRUN
 #if DEBUG_L
+	int count;
+
+	for(count=0;count<=10;count=count+1)
+	{
+		KL25Z_RGB_Flasher();
+		printf("Loop %d complete\n", count+1);
+	}
     PRINTF("PCDEBUG\r\n");
 #endif
     KL25Z_RGB_Flasher();
