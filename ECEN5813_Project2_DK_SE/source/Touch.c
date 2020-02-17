@@ -11,7 +11,7 @@
 #include "Touch.h"
 #include "LED.h"
 #include "global_defines.h"
-
+#include "fsl_debug_console.h"
 // global variable for Set_colour function
 uint8_t colour = RED;
 
@@ -53,7 +53,7 @@ uint8_t Set_colour(void){
 	uint16_t val;
 	val = Touch_scan();
 #if DEBUG_L
-	printf("SLIDER VALUE %d\r\n", val);
+	PRINTF("SLIDER VALUE %d\r\n", val);
 #endif
 	if(val <= 30){
 		LED_off(ALL);
@@ -74,7 +74,7 @@ uint8_t Set_colour(void){
 		LED_off(ALL);
 		colour = 0;
 #if DEBUG_L
-		printf("Error: Slider Value: %d is out of bounds\r\n", val);
+		PRINTF("Error: Slider Value: %d is out of bounds\r\n", val);
 #endif
 	}
 	return colour;

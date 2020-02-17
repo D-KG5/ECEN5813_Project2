@@ -8,15 +8,24 @@
 #ifndef GLOBAL_DEFINES_H_
 #define GLOBAL_DEFINES_H_
 
+#include "fsl_debug_console.h"
+
 // macros to enable disable debug, FB, PC modes
-#define FBRUN
+//#define FBRUN
 #define PCRUN
 #define DEBUG_MODE
 
+#ifdef FBRUN
+#define SDK_DEBUGCONSOLE 0U
+#define SDK_DEBUGCONSOLE_UART
+#endif
+#ifdef PCRUN
+//#define SDK_DEBUGCONSOLE 0U
+#endif
 #ifdef DEBUG_MODE
-#define DEBUG_L 1
+#define DEBUG_L (1)
 #else
-#define DEBUG_L 0
+#define DEBUG_L (0)
 #endif
 
 // define macros for LED_init function

@@ -10,7 +10,7 @@
 
 #include "LED.h"
 #include "global_defines.h"
-
+#include "fsl_debug_console.h"
 // delay function
 void Delay(volatile uint32_t number){
 	while(number != 0){
@@ -54,7 +54,7 @@ void LED_on(uint8_t color){
 		PTB->PSOR = MASK(GREEN_LED_SHIFT);
 		PTD->PSOR = MASK(BLUE_LED_SHIFT);
 #if DEBUG_L
-		printf("RED ON\r\n");
+		PRINTF("RED ON\r\n");
 #endif
 		break;
 	case GREEN:
@@ -62,7 +62,7 @@ void LED_on(uint8_t color){
 		PTB->PCOR = MASK(GREEN_LED_SHIFT);
 		PTD->PSOR = MASK(BLUE_LED_SHIFT);
 #if DEBUG_L
-		printf("GREEN ON\r\n");
+		PRINTF("GREEN ON\r\n");
 #endif
 		break;
 	case BLUE:
@@ -70,7 +70,7 @@ void LED_on(uint8_t color){
 		PTB->PSOR = MASK(GREEN_LED_SHIFT);
 		PTD->PCOR = MASK(BLUE_LED_SHIFT);
 #if DEBUG_L
-		printf("BLUE ON\r\n");
+		PRINTF("BLUE ON\r\n");
 #endif
 		break;
 	case ALL:
@@ -78,11 +78,11 @@ void LED_on(uint8_t color){
 		PTB->PCOR = MASK(GREEN_LED_SHIFT);
 		PTD->PCOR = MASK(BLUE_LED_SHIFT);
 #if DEBUG_L
-		printf("ALL ON\r\n");
+		PRINTF("ALL ON\r\n");
 #endif
 		break;
 	default:
-		printf("Error turning on LED\r\n");
+		PRINTF("Error turning on LED\r\n");
 	}
 }
 
@@ -96,19 +96,19 @@ void LED_off(uint8_t color){
 	case RED:
 		PTB->PSOR = MASK(RED_LED_SHIFT);
 #if DEBUG_L
-		printf("RED OFF\r\n");
+		PRINTF("RED OFF\r\n");
 #endif
 		break;
 	case GREEN:
 		PTB->PSOR = MASK(GREEN_LED_SHIFT);
 #if DEBUG_L
-		printf("GREEN OFF\r\n");
+		PRINTF("GREEN OFF\r\n");
 #endif
 		break;
 	case BLUE:
 		PTD->PSOR = MASK(BLUE_LED_SHIFT);
 #if DEBUG_L
-		printf("BLUE OFF\r\n");
+		PRINTF("BLUE OFF\r\n");
 #endif
 		break;
 	case ALL:
@@ -116,12 +116,12 @@ void LED_off(uint8_t color){
 		PTB->PSOR = MASK(GREEN_LED_SHIFT);
 		PTD->PSOR = MASK(BLUE_LED_SHIFT);
 #if DEBUG_L
-		printf("ALL OFF\r\n");
+		PRINTF("ALL OFF\r\n");
 #endif
 		break;
 	default:
 #if DEBUG_L
-		printf("Error turning off LED\r\n");
+		PRINTF("Error turning off LED\r\n");
 #endif
 	}
 }
@@ -146,42 +146,42 @@ void KL25Z_RGB_Flasher(void)
 
 
 	PTD->PCOR = MASK(BLUE_LED_SHIFT);
-	printf("LED is on\n");
+	PRINTF("LED is on\n");
 	Delay(500000);
 
 	PTD->PSOR = MASK(BLUE_LED_SHIFT);
-	printf("LED is off\n");
+	PRINTF("LED is off\n");
 	Delay(500000);
 
 
 	PTD->PCOR = MASK(BLUE_LED_SHIFT);
-	printf("LED is on\n");
+	PRINTF("LED is on\n");
 	Delay(1000000);
 
 	PTD->PSOR = MASK(BLUE_LED_SHIFT);
-	printf("LED is off\n");
+	PRINTF("LED is off\n");
 	Delay(500000);
 
 	PTD->PCOR = MASK(BLUE_LED_SHIFT);
-	printf("LED is on\n");
+	PRINTF("LED is on\n");
 	Delay(2000000);
 
 
 	PTD->PSOR = MASK(BLUE_LED_SHIFT);
-	printf("LED is off\n");
+	PRINTF("LED is off\n");
 	Delay(500000);
 
 
 	PTD->PCOR = MASK(BLUE_LED_SHIFT);
-	printf("LED is on\n");
+	PRINTF("LED is on\n");
 	Delay(3000000);
 
 	PTD->PSOR = MASK(BLUE_LED_SHIFT);
-	printf("LED is off\n");
+	PRINTF("LED is off\n");
 	Delay(500000);
 
 
-	printf("loop %d complete\n",num+1);
+	PRINTF("loop %d complete\n",num+1);
 
 	num=num+1;
 

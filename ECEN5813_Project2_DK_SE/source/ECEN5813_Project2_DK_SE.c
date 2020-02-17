@@ -39,12 +39,12 @@
 #include "pin_mux.h"
 #include "clock_config.h"
 #include "MKL25Z4.h"
+#include "fsl_debug_console.h"
 /* TODO: insert other include files here. */
 #include "LED.h"
 #include "Touch.h"
 #include "global_defines.h"
 /* TODO: insert other definitions and declarations here. */
-
 
 // lookup table function for delay
 // 0=0, 1=500, 2=1000, 3=2000, 4=3000 ms
@@ -54,22 +54,22 @@ uint32_t Delay_update(uint32_t delay){
 #if DEBUG_L
 	switch(delay){
 	case 6000000:
-		printf("START TIMER 3000\r\n");
+		PRINTF("START TIMER 3000\r\n");
 		break;
 	case 3000000:
-		printf("START TIMER 2000\r\n");
+		PRINTF("START TIMER 2000\r\n");
 		break;
 	case 1500000:
-		printf("START TIMER 1000\r\n");
+		PRINTF("START TIMER 1000\r\n");
 		break;
 	case 750000:
-		printf("START TIMER 500\r\n");
+		PRINTF("START TIMER 500\r\n");
 		break;
 	case 0:
-		printf("START TIMER 0\r\n");
+		PRINTF("START TIMER 0\r\n");
 		break;
 	default:
-		printf("Error starting timer\r\n");
+		PRINTF("Error starting timer\r\n");
 		break;
 	}
 #endif
@@ -80,10 +80,16 @@ uint32_t Delay_update(uint32_t delay){
  * @brief   Application entry point.
  */
 int main(void) {
+  	/* Init board hardware. */
+    BOARD_InitBootPins();
+    BOARD_InitBootClocks();
+    BOARD_InitBootPeripherals();
+  	/* Init FSL debug console. */
+    BOARD_InitDebugConsole();
 
 #ifdef FBRUN
 #if DEBUG_L
-    printf("FBDEBUG\r\n");
+    PRINTF("FBDEBUG\r\n");
 #endif
     // initialize RGB LED and Touch slider
     LED_init();
@@ -113,7 +119,7 @@ int main(void) {
 		Delay(Delay_update(1));
 	}
 #if DEBUG_L
-	printf("10 cycles done\r\n");
+	PRINTF("10 cycles done\r\n");
 #endif
 	LED_off(ALL);	// turn off LED when 10 cycles are finished
 
@@ -129,7 +135,7 @@ int main(void) {
 #endif
 #ifdef PCRUN
 #if DEBUG_L
-    printf("PCDEBUG\r\n");
+    PRINTF("PCDEBUG\r\n");
 #endif
     KL25Z_RGB_Flasher();
     /* Force the counter to be placed into memory. */

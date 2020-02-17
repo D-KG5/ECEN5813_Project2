@@ -85,12 +85,12 @@
 #endif /* SCANF_ADVANCED_ENABLE */
 
 #if SDK_DEBUGCONSOLE /* Select printf, scanf, putchar, getchar of SDK version. */
-#define printf DbgConsole_Printf
+#define PRINTF DbgConsole_Printf
 #define SCANF DbgConsole_Scanf
 #define PUTCHAR DbgConsole_Putchar
 #define GETCHAR DbgConsole_Getchar
 #else /* Select printf, scanf, putchar, getchar of toolchain. */
-#define printf printf
+#define PRINTF printf
 #define SCANF scanf
 #define PUTCHAR putchar
 #define GETCHAR getchar
