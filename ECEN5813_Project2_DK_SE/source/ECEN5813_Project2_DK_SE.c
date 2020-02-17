@@ -138,6 +138,8 @@ int main(void) {
         __asm volatile ("nop");
     }
 #endif
+
+//IN the PC run since board color doesn't matter we didn't look into how the code works after uploading it in the board. But it does print in console as it is expected.
 #ifdef PCRUN
 #if DEBUG_L
 	int count;

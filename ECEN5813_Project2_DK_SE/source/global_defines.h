@@ -11,8 +11,8 @@
 #include "fsl_debug_console.h"
 
 // macros to enable/disable debug, FB, PC modes
-#define FBRUN
-//#define PCRUN
+//#define FBRUN
+#define PCRUN
 #define DEBUG_MODE
 
 // enable UART redirection if FBRUN is defined
