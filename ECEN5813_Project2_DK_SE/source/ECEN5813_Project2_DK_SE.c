@@ -138,24 +138,25 @@ int main(void) {
         __asm volatile ("nop");
     }
 #endif
-
-//IN the PC run since board color doesn't matter we didn't look into how the code works after uploading it in the board. But it does print in console as it is expected.
+//IN the PC run since board color doesn't matter we didn't look into how the code works after uploading it in the board.
+//But it does print in console as it is expected.
 #ifdef PCRUN
 #if DEBUG_L
 	int count;
-
+	PRINTF("PCDEBUG\r\n");
 	for(count=0;count<=10;count=count+1)
 	{
 		KL25Z_RGB_Flasher();
 		printf("Loop %d complete\n", count+1);
 	}
-    PRINTF("PCDEBUG\r\n");
+#else
+	PRINTF("PCRUN\r\n");
+	int count;
+	for(count=0;count<=10;count=count+1)
+	{
+		KL25Z_RGB_Flasher();
+	}
 #endif
-	for(count=0;count<=10;count=count+1)
-	{
-		KL25Z_RGB_Flasher();
-		printf("Loop %d complete\n", count+1);
-	}
     /* Force the counter to be placed into memory. */
     volatile static int j = 0 ;
     /* Enter an infinite loop, just incrementing a counter. */

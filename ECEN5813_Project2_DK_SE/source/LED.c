@@ -129,82 +129,99 @@ void LED_off(uint8_t color){
 
 void KL25Z_RGB_Flasher(void)
 {
-
-	SIM->SCGC5 |= SIM_SCGC5_PORTB_MASK | SIM_SCGC5_PORTD_MASK;
-
-	// Make 3 pins GPIO
-	PORTB->PCR[RED_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
-	PORTB->PCR[RED_LED_SHIFT] |= PORT_PCR_MUX(1);
-	PORTB->PCR[GREEN_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
-	PORTB->PCR[GREEN_LED_SHIFT] |= PORT_PCR_MUX(1);
-	PORTD->PCR[BLUE_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
-	PORTD->PCR[BLUE_LED_SHIFT] |= PORT_PCR_MUX(1);
-
-	// set ports to outputs
-	PTB->PDDR |= MASK(RED_LED_SHIFT) | MASK(GREEN_LED_SHIFT);
-	PTD->PDDR |= MASK(BLUE_LED_SHIFT);
-	// clear ports
-	PTB->PCOR |= MASK(RED_LED_SHIFT) | MASK(GREEN_LED_SHIFT);
-	PTD->PCOR |= MASK(BLUE_LED_SHIFT);
 	int num=0;
-
+//	// Enable clock to Port B and Port D
+//	SIM->SCGC5 |= SIM_SCGC5_PORTB_MASK | SIM_SCGC5_PORTD_MASK;
+//
+//	// Make 3 pins GPIO
+//	PORTB->PCR[RED_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
+//	PORTB->PCR[RED_LED_SHIFT] |= PORT_PCR_MUX(1);
+//	PORTB->PCR[GREEN_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
+//	PORTB->PCR[GREEN_LED_SHIFT] |= PORT_PCR_MUX(1);
+//	PORTD->PCR[BLUE_LED_SHIFT] &= ~PORT_PCR_MUX_MASK;
+//	PORTD->PCR[BLUE_LED_SHIFT] |= PORT_PCR_MUX(1);
+//
+//	// Set ports to outputs
+//	PTB->PDDR |= MASK(RED_LED_SHIFT) | MASK(GREEN_LED_SHIFT);
+//	PTD->PDDR |= MASK(BLUE_LED_SHIFT);
+//
+//	PTB->PCOR |= MASK(RED_LED_SHIFT) | MASK(GREEN_LED_SHIFT);
+//	PTD->PCOR |= MASK(BLUE_LED_SHIFT);
 	while(num<3)
 		{
 
 
 
-		PTD->PCOR = MASK(BLUE_LED_SHIFT);
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PCOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
 
 		PRINTF("LED Blue on |  Green off  | Red off \n");
-		Delay(500000);
+#if DEBUG_L
+		PRINTF("Delay 500\r\n");
+#endif
+		Delay(1500000);
 
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
 		PRINTF("LED Blue off |  Green off  | Red off \n");
-		Delay(500000);
+#if DEBUG_L
+		PRINTF("Delay 500\r\n");
+#endif
+		Delay(1500000);
 
-
-		PTD->PCOR = MASK(BLUE_LED_SHIFT);
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PCOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
 		PRINTF("LED Blue on |  Green off  | Red off \n");
-		Delay(1000000);
-
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
-		PRINTF("LED Blue off |  Green off  | Red off \n");
-		Delay(500000);
-
-		PTD->PCOR = MASK(BLUE_LED_SHIFT);
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
-		PRINTF("LED Blue on |  Green off  | Red off \n");
-		Delay(2000000);
-
-
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
-		PRINTF("LED Blue off |  Green off  | Red off \n");
-		Delay(500000);
-
-
-		PTD->PCOR = MASK(BLUE_LED_SHIFT);
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
-		PRINTF("LED Blue on |  Green off  | Red off \n");
+#if DEBUG_L
+		PRINTF("Delay 1000\r\n");
+#endif
 		Delay(3000000);
-
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
 		PRINTF("LED Blue off |  Green off  | Red off \n");
-		Delay(500000);
 
+#if DEBUG_L
+		PRINTF("Delay 500\r\n");
+#endif
+		Delay(1500000);
+//		PTD->PCOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		PRINTF("LED Blue on |  Green off  | Red off \n");
+#if DEBUG_L
+		PRINTF("Delay 2000\r\n");
+#endif
+		Delay(6000000);
+
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		PRINTF("LED Blue off |  Green off  | Red off \n");
+#if DEBUG_L
+		PRINTF("Delay 500\r\n");
+#endif
+		Delay(1500000);
+
+//		PTD->PCOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		PRINTF("LED Blue on |  Green off  | Red off \n");
+#if DEBUG_L
+		PRINTF("Delay 3000\r\n");
+#endif
+		Delay(9000000);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		PRINTF("LED Blue off |  Green off  | Red off \n");
+#if DEBUG_L
+		PRINTF("Delay 500\r\n");
+#endif
+		Delay(1500000);
 
 
 
@@ -216,57 +233,76 @@ void KL25Z_RGB_Flasher(void)
 
 
 
-		PTB->PCOR = MASK(RED_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PCOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
 		PRINTF("LED is Red on |  Green off  | Blue off \n");
-		Delay(500000);
+#if DEBUG_L
+		PRINTF("Delay 500\r\n");
+#endif
+		Delay(1500000);
 
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
 		PRINTF("LED is Red off |  Green off  | Blue off \n");
-		Delay(500000);
+#if DEBUG_L
+		PRINTF("Delay 500\r\n");
+#endif
+		Delay(1500000);
 
-		PTB->PCOR = MASK(RED_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PCOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
 		PRINTF("LED is Red on |  Green off  | Blue off \n");
-		Delay(1000000);
-
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
-		PRINTF("LED is Red off |  Green off  | Blue off \n");
-		Delay(500000);
-
-		PTB->PCOR = MASK(RED_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
-		PRINTF("LED is Red on |  Green off  | Blue off \n");
-		Delay(2000000);
-
-
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
-		PRINTF("LED is Red off |  Green off  | Blue off \n");
-		Delay(500000);
-
-
-		PTB->PCOR = MASK(RED_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
-		PRINTF("LED is Red on |  Green off  | Blue off \n");
+#if DEBUG_L
+		PRINTF("Delay 1000\r\n");
+#endif
 		Delay(3000000);
 
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
 		PRINTF("LED is Red off |  Green off  | Blue off \n");
-		Delay(500000);
+#if DEBUG_L
+		PRINTF("Delay 500\r\n");
+#endif
+		Delay(1500000);
 
+//		PTD->PCOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		PRINTF("LED is Red on |  Green off  | Blue off \n");
+#if DEBUG_L
+		PRINTF("Delay 2000\r\n");
+#endif
+		Delay(6000000);
 
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		PRINTF("LED is Red off |  Green off  | Blue off \n");
+#if DEBUG_L
+		PRINTF("Delay 500\r\n");
+#endif
+		Delay(1500000);
+
+//		PTD->PCOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		PRINTF("LED is Red on |  Green off  | Blue off \n");
+#if DEBUG_L
+		PRINTF("Delay 3000\r\n");
+#endif
+		Delay(9000000);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+		PRINTF("LED is Red off |  Green off  | Blue off \n");
+#if DEBUG_L
+		PRINTF("Delay 500\r\n");
+#endif
+		Delay(1500000);
 
 
 		num=num+1;
@@ -277,58 +313,74 @@ void KL25Z_RGB_Flasher(void)
 
 
 
-		PTB->PCOR = MASK(GREEN_LED_SHIFT);
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PCOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
 		PRINTF("LED Green on |  Red off  | Blue off \n");
-		Delay(500000);
-
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+#if DEBUG_L
+		PRINTF("Delay 500\r\n");
+#endif
+		Delay(1500000);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
 		PRINTF("LED Green off |  Red off  | Blue off \n");
-		Delay(500000);
+#if DEBUG_L
+		PRINTF("Delay 500\r\n");
+#endif
+		Delay(1500000);
 
-
-		PTB->PCOR = MASK(GREEN_LED_SHIFT);
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PCOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
 		PRINTF("LED Green on |  Red off  | Blue off \n");
-		Delay(1000000);
-
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-		PRINTF("LED Green off |  Red off  | Blue off \n");
-		Delay(500000);
-
-		PTB->PCOR = MASK(GREEN_LED_SHIFT);
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-		PRINTF("LED Green on |  Red off  | Blue off \n");
-		Delay(2000000);
-
-
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-		PRINTF("LED Green off |  Red off  | Blue off \n");
-		Delay(500000);
-
-
-		PTB->PCOR = MASK(GREEN_LED_SHIFT);
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
-		PRINTF("LED Green on |  Red off  | Blue off \n");
+#if DEBUG_L
+		PRINTF("Delay 1000\r\n");
+#endif
 		Delay(3000000);
 
-		PTB->PSOR = MASK(GREEN_LED_SHIFT);
-		PTB->PSOR = MASK(RED_LED_SHIFT);
-		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
 		PRINTF("LED Green off |  Red off  | Blue off \n");
-		Delay(500000);
+#if DEBUG_L
+		PRINTF("Delay 500\r\n");
+#endif
+		Delay(1500000);
+//		PTD->PCOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		PRINTF("LED Green on |  Red off  | Blue off \n");
+#if DEBUG_L
+		PRINTF("Delay 2000\r\n");
+#endif
+		Delay(6000000);
 
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		PRINTF("LED Green off |  Red off  | Blue off \n");
+#if DEBUG_L
+		PRINTF("Delay 500\r\n");
+#endif
+		Delay(1500000);
 
+//		PTD->PCOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+		PRINTF("LED Green on |  Red off  | Blue off \n");
+#if DEBUG_L
+		PRINTF("Delay 3000\r\n");
+#endif
+		Delay(9000000);
+//		PTD->PSOR = MASK(GREEN_LED_SHIFT);
+//		PTD->PSOR = MASK(RED_LED_SHIFT);
+//		PTD->PSOR = MASK(BLUE_LED_SHIFT);
+		PRINTF("LED Green off |  Red off  | Blue off \n");
+#if DEBUG_L
+		PRINTF("Delay 500\r\n");
+#endif
+		Delay(1500000);
 
 
 		num=num+1;
