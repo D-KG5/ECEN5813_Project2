@@ -149,7 +149,7 @@ int main(void) {
 	}
     PRINTF("PCDEBUG\r\n");
 #endif
-    KL25Z_RGB_Flasher();
+
     /* Force the counter to be placed into memory. */
     volatile static int j = 0 ;
     /* Enter an infinite loop, just incrementing a counter. */
