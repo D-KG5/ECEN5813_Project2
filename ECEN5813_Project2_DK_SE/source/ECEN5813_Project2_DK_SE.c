@@ -34,12 +34,15 @@
  * @author	Dhruva Koley and Sagar Eligar
  */
 #include <stdio.h>
+#include <stdint.h>
+#ifdef FBRUN
 #include "board.h"
 #include "peripherals.h"
 #include "pin_mux.h"
 #include "clock_config.h"
 #include "MKL25Z4.h"
 #include "fsl_debug_console.h"
+#endif
 /* TODO: insert other include files here. */
 #include "LED.h"
 #include "Touch.h"
@@ -56,22 +59,34 @@ uint32_t Delay_update(uint32_t delay){
 #if DEBUG_L
 	switch(delay){
 	case 9000000:
+#ifdef FBRUN
 		PRINTF("START TIMER 3000\r\n");
+#endif
 		break;
 	case 6000000:
+#ifdef FBRUN
 		PRINTF("START TIMER 2000\r\n");
+#endif
 		break;
 	case 3000000:
+#ifdef FBRUN
 		PRINTF("START TIMER 1000\r\n");
+#endif
 		break;
 	case 1500000:
+#ifdef FBRUN
 		PRINTF("START TIMER 500\r\n");
+#endif
 		break;
 	case 0:
+#ifdef FBRUN
 		PRINTF("START TIMER 0\r\n");
+#endif
 		break;
 	default:
+#ifdef FBRUN
 		PRINTF("Error starting timer\r\n");
+#endif
 		break;
 	}
 #endif
@@ -83,11 +98,11 @@ uint32_t Delay_update(uint32_t delay){
  */
 int main(void) {
   	/* Init board hardware. */
-    BOARD_InitBootPins();
-    BOARD_InitBootClocks();
-    BOARD_InitBootPeripherals();
+//    BOARD_InitBootPins();
+//    BOARD_InitBootClocks();
+//    BOARD_InitBootPeripherals();
   	/* Init FSL debug console. */
-    BOARD_InitDebugConsole();
+//    BOARD_InitDebugConsole();
 
 #ifdef FBRUN
 #if DEBUG_L
@@ -143,7 +158,7 @@ int main(void) {
 #ifdef PCRUN
 #if DEBUG_L
 	int count;
-	PRINTF("PCDEBUG\r\n");
+	printf("PCDEBUG\r\n");
 	for(count=0;count<=10;count=count+1)
 	{
 		KL25Z_RGB_Flasher();

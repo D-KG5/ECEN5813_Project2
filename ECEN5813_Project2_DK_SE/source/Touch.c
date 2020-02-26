@@ -5,13 +5,17 @@
  *      Author: Dhruva
  */
 #include <stdio.h>
+#include <stdint.h>
+#ifdef FBRUN
 #include "board.h"
 #include "MKL25Z4.h"
+#include "fsl_debug_console.h"
+#endif
 
 #include "Touch.h"
 #include "LED.h"
 #include "global_defines.h"
-#include "fsl_debug_console.h"
+
 // global variable for Set_colour function
 uint8_t colour = RED;
 

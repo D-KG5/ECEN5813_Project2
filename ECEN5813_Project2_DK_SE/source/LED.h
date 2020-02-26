@@ -7,6 +7,7 @@
 
 #ifndef LED_H_
 #define LED_H_
+#include <stdint.h>
 
 void Delay(volatile uint32_t number);
 void LED_init(void);
